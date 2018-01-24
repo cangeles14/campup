@@ -1,0 +1,13 @@
+        <div class="container text-center">
+            <a class="btn btn-med btn-success" href="/campground">Back to Campgrounds</a>
+            <p>TradeMark CampUp 2017</p>
+        </div>
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOA3nXp9m9GlDiu4A9gjcLdTglfp3YFO4&libraries=places&callback=activatePlacesSearch"></script>
+            <script>
+            function activatePlacesSearch () {
+                var input = document.getElementById("location");
+                var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+        </script>
+    </body>
+</html>
