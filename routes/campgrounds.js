@@ -81,22 +81,41 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req,res){
 
 // UPDATE
 
-router.put("/:id", middleware.checkCampgroundOwnership, function(req,res){
-    // geocoder.geocode(req.body.campground.location, function (err, data){
-    //     var lat = data[0].latitude;
-    //     var lng = data[0].longitude;
-    //     var location = data[0].formattedAddress;
-        var newCampground = {name: req.body.campground.name, price: req.body.campground.price, image: req.body.campground.image, description: req.body.campground.desc, author: req.body.campground.author, location: req.body.campground.location, lat: req.body.campground.lat, lng: req.body.campground.lng};    
-        Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
-          if (err){
-              req.flash('error', 'Invalid address, trying typing a new address');
-              return res.redirect('back');
-          } else {
-              res.redirect("/campground/" + req.params.id);
-          }
-        });
+router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
+  geocoder.geocode(req.body.campground.location, function (err, data) {
+        var lat = data.latitude;
+        var lng = data.longitude;
+        var location = data.formattedAddress;
+        var newData = {name: req.body.campground.name, image: req.body.campground.image, description: req.body.campground.description, price: req.body.campground.price, location: location, lat: lat, lng: lng};
+    Campground.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, campground){
+        if(err){
+            req.flash("error", err.message);
+            res.redirect("back");
+        } else {
+            req.flash("success","Successfully Updated!");
+            res.redirect("/campground/" + req.params.id);
+        }
     });
+  });
+});
+// // UPDATE CAMPGROUND ROUTE
+// router.put("/:id",middleware.checkCampgroundOwnership, function(req, res){
+//     // find and update the correct campground
+//     geocoder.geocode(req.body.campground.location, function (err, data){
+//         var lat = data[0].latitude;
+//         var lng = data[0].longitude;
+//         var location = data[0].formattedAddress;
+//     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
+//       if(err){
+//           res.redirect("/campground");
+//       } else {
+//           //redirect somewhere(show page)
+//           res.redirect("/campground/" + req.params.id);
+//       }
+//     });
 // });
+
+
 
 
 
