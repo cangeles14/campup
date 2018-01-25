@@ -34,7 +34,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
   var author = {
       id: req.user._id,
       username: req.user.username
-  }
+  };
   var price = req.body.price;
   geocoder.geocode(req.body.location, function (err, data) {
     if (err || data.status === 'ZERO_RESULTS') {
@@ -84,9 +84,6 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req,res){
     });
 });
 
-
-
-
 // UPDATE
 
 // PUT - updates campground in the database
@@ -107,26 +104,6 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
     });
   });
 });
-// // UPDATE CAMPGROUND ROUTE
-// router.put("/:id",middleware.checkCampgroundOwnership, function(req, res){
-//     // find and update the correct campground
-//     geocoder.geocode(req.body.campground.location, function (err, data){
-//         var lat = data[0].latitude;
-//         var lng = data[0].longitude;
-//         var location = data[0].formattedAddress;
-//     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
-//       if(err){
-//           res.redirect("/campground");
-//       } else {
-//           //redirect somewhere(show page)
-//           res.redirect("/campground/" + req.params.id);
-//       }
-//     });
-// });
-
-
-
-
 
 // DESTROY
 
