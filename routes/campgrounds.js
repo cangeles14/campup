@@ -119,9 +119,9 @@ router.put("/:id", middleware.checkCampgroundOwnership, upload.single('image'), 
         var lat = data[0].latitude;
         var lng = data[0].longitude;
         var location = data[0].formattedAddress;
-        
-        cloudinary.uploader.upload(req.file, function(result) {
-            var image = req.body.image ? req.body.image : "/images/temp.png";
+
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            var image = req.body.image;
             image = result.secure_url;
             var newData = {name: req.body.name, image: image, description: req.body.description, price: req.body.price, location: location, lat: lat, lng: lng};
             
