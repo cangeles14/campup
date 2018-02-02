@@ -20,12 +20,13 @@ var imageFilter = function (req, file, cb) {
 var upload = multer({ storage: storage, fileFilter: imageFilter});
 
 
-var cloudinarykey = process.env.CLOUDINARYKEY;
+var cloudinaryApiSecret = process.env.cloudinaryApiSecret;
 var cloudinary = require('cloudinary');
 cloudinary.config({ 
   cloud_name: 'dicv2dhkg', 
   api_key: 347487287355216, 
-  api_secret: cloudinarykey
+  api_secret: cloudinaryApiSecret,
+  
 });
 // Geocoder
 var options = {
@@ -112,18 +113,14 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req,res){
 // UPDATE
 
 // PUT - updates campground in the database
-router.put("/:id", middleware.checkCampgroundOwnership, upload.single('image'), function(req, res){
+router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
 
-    
+
     geocoder.geocode(req.body.location, function (err, data) {
         var lat = data[0].latitude;
         var lng = data[0].longitude;
         var location = data[0].formattedAddress;
-
-        cloudinary.uploader.upload(req.file.path, function(result) {
-            var image = req.body.image;
-            image = result.secure_url;
-            var newData = {name: req.body.name, image: image, description: req.body.description, price: req.body.price, location: location, lat: lat, lng: lng};
+        var newData = {name: req.body.name, description: req.body.description, price: req.body.price, location: location, lat: lat, lng: lng};
             
             Campground.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, campground){
                 if(err){
@@ -136,7 +133,6 @@ router.put("/:id", middleware.checkCampgroundOwnership, upload.single('image'), 
             });
         });
     });
-});
 
 // DESTROY
 
