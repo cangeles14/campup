@@ -1,4 +1,5 @@
 var express         = require('express'),
+    dotenv          = require('dotenv'),
     app             = express(),
     bodyParser      = require('body-parser'),
     mongoose        = require("mongoose"),
@@ -19,6 +20,7 @@ var commentRoutes    = require ("./routes/comments"),
 
 var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 mongoose.connect(url);
+require('dotenv').config();
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
