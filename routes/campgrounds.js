@@ -20,13 +20,13 @@ var imageFilter = function (req, file, cb) {
 var upload = multer({ storage: storage, fileFilter: imageFilter});
 
 
-var cloudinaryApiSecret = process.env.cloudinaryApiSecret;
+require('dotenv').config();
 var cloudinary = require('cloudinary');
+var cloudinarySecret = process.env.CLOUDINARY_API_SECRET;
 cloudinary.config({ 
   cloud_name: 'dicv2dhkg', 
-  api_key: 347487287355216, 
-  api_secret: cloudinaryApiSecret,
-  
+  api_key: '347487287355216', 
+  api_secret: cloudinarySecret,
 });
 // Geocoder
 var options = {
