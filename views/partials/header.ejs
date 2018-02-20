@@ -1,42 +1,67 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>CampUp</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <link rel="stylesheet" href="/stylesheets/main.css">
-    </head>
-    <body>
-        
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="/" class="navbar-brand">CampUp </a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <% if(!currentUser){ %>
-                            <li><a href="/login">Login</a></li>
-                            <li><a href="/register">Sign Up</a></li>
-                       <% } else { %>
-                            <li><a href="#">Signed In As <%= currentUser.username %></a></li>
-                            <li><a href="/logout">Logout</a></li>
-                       <%  } %>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="container">
-            <% if (error && error.length > 0) { %>
-                <div class="alert alert-danger" role="alert">
-                    <%= error %>
-                </div>
-            <% } %>
-            <% if (success && success.length > 0) { %>
-                <div class="alert alert-success" role="alert">
-                    <%= success %>
-                </div>
-            <% } %>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Christopher Angeles">
+
+    <title>CampUp</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/fontawesome.min.css">
+
+  </head>
+
+  <body>
+    <!-- Flash Alert -->
+    <div class="container alertbox">
+      <% if (error && error.length > 0) { %>
+        <div class="alert alert-danger" role="alert">
+          <%= error %>
         </div>
-        
-        
+      <% } %>
+      <% if (success && success.length > 0) { %>
+        <div class="alert alert-success" role="alert">
+          <%= success %>
+        </div>
+      <% } %>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/campground">CampUp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <% if(!currentUser){ %>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/register">Sign Up</a>
+              </li>
+            <% } else { %>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Signed In As <%= currentUser.username %></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            <%  } %>
+          </ul>
+        </div>
+      </div>
+    </nav>

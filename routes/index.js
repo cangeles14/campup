@@ -33,11 +33,12 @@ router.post("/login", passport.authenticate("local",
     successRedirect: "/campground",
     failureRedirect: "/login",
 }) , function(req,res){
+    req.flash("success", 'Logged In');
 });
 // Logout Logic
 router.get("/logout", function(req,res){
     req.logout();
-    req.flash("success", "Logged out you");
+    req.flash("success", "Logged Out");
     res.redirect("/campground");
 });
 //Exports

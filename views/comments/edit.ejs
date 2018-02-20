@@ -1,9 +1,9 @@
 <% include ../partials/header %>
 
-
-<div class="container">
-    <div class="row">
-        <h1 style="text-align:center">Edit Comment</h1>
+<div class="container" style="margin-top:10rem">
+    <h1 style="text-align:center">Edit Comment</h1>
+</div>
+<div class="container align-items-centerm mt-5">
         <div style="width: 30%; margin:30px auto;">
             <form action="/campground/<%= campground_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
                 <div class="form-group">
@@ -15,11 +15,9 @@
             </form>
             <a href="/campground">Go Back</a>
         </div>
-    </div>
 </div>
 
 
 
 
 
-<% include ../partials/footer %>

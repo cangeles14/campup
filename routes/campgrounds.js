@@ -157,6 +157,7 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req,res){
     });
 });
 
+// Fuzzy Search
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
