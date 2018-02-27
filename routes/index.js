@@ -26,14 +26,15 @@ router.post("/register", function(req,res){
 // Login
 router.get("/login", function(req,res){
     res.render("login");
+    req.flash("success", 'Logged In');
 });
 // Login Logic
 router.post("/login", passport.authenticate("local", 
-{
-    successRedirect: "/campground",
-    failureRedirect: "/login",
-}) , function(req,res){
-    req.flash("success", 'Logged In');
+    {
+        successRedirect: "/campground",
+        failureRedirect: "/login",
+    }), function(req,res){
+        req.flash("success", 'Logged In');
 });
 // Logout Logic
 router.get("/logout", function(req,res){
