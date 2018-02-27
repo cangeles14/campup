@@ -88,6 +88,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
                     return res.redirect('back');
                 } else {
                     //redirect back to campgrounds page
+                    req.flash("success", 'Sucessfully Created Campground');
                     res.redirect("/campground");
                 }
             });
